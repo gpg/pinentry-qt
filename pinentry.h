@@ -150,6 +150,9 @@ int pinentry_loop (void);
 /* The same as above but allows to specify the i/o descriptors. */
 int pinentry_loop2 (int infd, int outfd);
 
+/* Allow changing the standard file handles.  */
+void pinentry_set_std_fd (int no, int val);
+
 
 /* Convert the UTF-8 encoded string TEXT to the encoding given in
    LC_CTYPE.  Return NULL on error. */

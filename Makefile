@@ -36,10 +36,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/marcus/g10/projects/komo3/cmake/pinentry-qt
+CMAKE_SOURCE_DIR = /home/wk/w/pinentry-qt
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/marcus/g10/projects/komo3/cmake/pinentry-qt
+CMAKE_BINARY_DIR = /home/wk/w/pinentry-qt
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -95,6 +95,26 @@ list_install_components:
 list_install_components/fast: list_install_components
 .PHONY : list_install_components/fast
 
+# Special rule for the target package
+package: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
+	/usr/bin/cpack --config ./CPackConfig.cmake
+.PHONY : package
+
+# Special rule for the target package
+package/fast: package
+.PHONY : package/fast
+
+# Special rule for the target package_source
+package_source:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
+	/usr/bin/cpack --config ./CPackSourceConfig.cmake /home/wk/w/pinentry-qt/CPackSourceConfig.cmake
+.PHONY : package_source
+
+# Special rule for the target package_source
+package_source/fast: package_source
+.PHONY : package_source/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -107,9 +127,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marcus/g10/projects/komo3/cmake/pinentry-qt/CMakeFiles /home/marcus/g10/projects/komo3/cmake/pinentry-qt/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wk/w/pinentry-qt/CMakeFiles /home/wk/w/pinentry-qt/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/marcus/g10/projects/komo3/cmake/pinentry-qt/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wk/w/pinentry-qt/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -149,185 +169,317 @@ pinentry-qt/fast:
 	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/build
 .PHONY : pinentry-qt/fast
 
-# target to build an object file
-assuan-buffer.o:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-buffer.o
+assuan-buffer.o: assuan-buffer.c.o
 .PHONY : assuan-buffer.o
 
-# target to preprocess a source file
-assuan-buffer.i:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-buffer.i
+# target to build an object file
+assuan-buffer.c.o:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-buffer.c.o
+.PHONY : assuan-buffer.c.o
+
+assuan-buffer.i: assuan-buffer.c.i
 .PHONY : assuan-buffer.i
 
-# target to generate assembly for a file
-assuan-buffer.s:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-buffer.s
+# target to preprocess a source file
+assuan-buffer.c.i:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-buffer.c.i
+.PHONY : assuan-buffer.c.i
+
+assuan-buffer.s: assuan-buffer.c.s
 .PHONY : assuan-buffer.s
 
-# target to build an object file
-assuan-errors.o:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-errors.o
+# target to generate assembly for a file
+assuan-buffer.c.s:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-buffer.c.s
+.PHONY : assuan-buffer.c.s
+
+assuan-errors.o: assuan-errors.c.o
 .PHONY : assuan-errors.o
 
-# target to preprocess a source file
-assuan-errors.i:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-errors.i
+# target to build an object file
+assuan-errors.c.o:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-errors.c.o
+.PHONY : assuan-errors.c.o
+
+assuan-errors.i: assuan-errors.c.i
 .PHONY : assuan-errors.i
 
-# target to generate assembly for a file
-assuan-errors.s:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-errors.s
+# target to preprocess a source file
+assuan-errors.c.i:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-errors.c.i
+.PHONY : assuan-errors.c.i
+
+assuan-errors.s: assuan-errors.c.s
 .PHONY : assuan-errors.s
 
-# target to build an object file
-assuan-handler.o:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-handler.o
+# target to generate assembly for a file
+assuan-errors.c.s:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-errors.c.s
+.PHONY : assuan-errors.c.s
+
+assuan-handler.o: assuan-handler.c.o
 .PHONY : assuan-handler.o
 
-# target to preprocess a source file
-assuan-handler.i:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-handler.i
+# target to build an object file
+assuan-handler.c.o:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-handler.c.o
+.PHONY : assuan-handler.c.o
+
+assuan-handler.i: assuan-handler.c.i
 .PHONY : assuan-handler.i
 
-# target to generate assembly for a file
-assuan-handler.s:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-handler.s
+# target to preprocess a source file
+assuan-handler.c.i:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-handler.c.i
+.PHONY : assuan-handler.c.i
+
+assuan-handler.s: assuan-handler.c.s
 .PHONY : assuan-handler.s
 
-# target to build an object file
-assuan-listen.o:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-listen.o
+# target to generate assembly for a file
+assuan-handler.c.s:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-handler.c.s
+.PHONY : assuan-handler.c.s
+
+assuan-listen.o: assuan-listen.c.o
 .PHONY : assuan-listen.o
 
-# target to preprocess a source file
-assuan-listen.i:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-listen.i
+# target to build an object file
+assuan-listen.c.o:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-listen.c.o
+.PHONY : assuan-listen.c.o
+
+assuan-listen.i: assuan-listen.c.i
 .PHONY : assuan-listen.i
 
-# target to generate assembly for a file
-assuan-listen.s:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-listen.s
+# target to preprocess a source file
+assuan-listen.c.i:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-listen.c.i
+.PHONY : assuan-listen.c.i
+
+assuan-listen.s: assuan-listen.c.s
 .PHONY : assuan-listen.s
 
-# target to build an object file
-assuan-pipe-server.o:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-pipe-server.o
+# target to generate assembly for a file
+assuan-listen.c.s:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-listen.c.s
+.PHONY : assuan-listen.c.s
+
+assuan-pipe-server.o: assuan-pipe-server.c.o
 .PHONY : assuan-pipe-server.o
 
-# target to preprocess a source file
-assuan-pipe-server.i:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-pipe-server.i
+# target to build an object file
+assuan-pipe-server.c.o:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-pipe-server.c.o
+.PHONY : assuan-pipe-server.c.o
+
+assuan-pipe-server.i: assuan-pipe-server.c.i
 .PHONY : assuan-pipe-server.i
 
-# target to generate assembly for a file
-assuan-pipe-server.s:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-pipe-server.s
+# target to preprocess a source file
+assuan-pipe-server.c.i:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-pipe-server.c.i
+.PHONY : assuan-pipe-server.c.i
+
+assuan-pipe-server.s: assuan-pipe-server.c.s
 .PHONY : assuan-pipe-server.s
 
-# target to build an object file
-assuan-util.o:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-util.o
+# target to generate assembly for a file
+assuan-pipe-server.c.s:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-pipe-server.c.s
+.PHONY : assuan-pipe-server.c.s
+
+assuan-util.o: assuan-util.c.o
 .PHONY : assuan-util.o
 
-# target to preprocess a source file
-assuan-util.i:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-util.i
+# target to build an object file
+assuan-util.c.o:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-util.c.o
+.PHONY : assuan-util.c.o
+
+assuan-util.i: assuan-util.c.i
 .PHONY : assuan-util.i
 
-# target to generate assembly for a file
-assuan-util.s:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-util.s
+# target to preprocess a source file
+assuan-util.c.i:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-util.c.i
+.PHONY : assuan-util.c.i
+
+assuan-util.s: assuan-util.c.s
 .PHONY : assuan-util.s
 
+# target to generate assembly for a file
+assuan-util.c.s:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/assuan-util.c.s
+.PHONY : assuan-util.c.s
+
+getopt.o: getopt.c.o
+.PHONY : getopt.o
+
 # target to build an object file
-main.o:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/main.o
+getopt.c.o:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/getopt.c.o
+.PHONY : getopt.c.o
+
+getopt.i: getopt.c.i
+.PHONY : getopt.i
+
+# target to preprocess a source file
+getopt.c.i:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/getopt.c.i
+.PHONY : getopt.c.i
+
+getopt.s: getopt.c.s
+.PHONY : getopt.s
+
+# target to generate assembly for a file
+getopt.c.s:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/getopt.c.s
+.PHONY : getopt.c.s
+
+main.o: main.cpp.o
 .PHONY : main.o
 
-# target to preprocess a source file
-main.i:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/main.i
+# target to build an object file
+main.cpp.o:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
 .PHONY : main.i
 
-# target to generate assembly for a file
-main.s:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/main.s
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
 .PHONY : main.s
 
-# target to build an object file
-pinentry.o:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/pinentry.o
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/main.cpp.s
+.PHONY : main.cpp.s
+
+pinentry.o: pinentry.c.o
 .PHONY : pinentry.o
 
-# target to preprocess a source file
-pinentry.i:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/pinentry.i
+# target to build an object file
+pinentry.c.o:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/pinentry.c.o
+.PHONY : pinentry.c.o
+
+pinentry.i: pinentry.c.i
 .PHONY : pinentry.i
 
-# target to generate assembly for a file
-pinentry.s:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/pinentry.s
+# target to preprocess a source file
+pinentry.c.i:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/pinentry.c.i
+.PHONY : pinentry.c.i
+
+pinentry.s: pinentry.c.s
 .PHONY : pinentry.s
 
-# target to build an object file
-pinentrydialog.o:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/pinentrydialog.o
+# target to generate assembly for a file
+pinentry.c.s:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/pinentry.c.s
+.PHONY : pinentry.c.s
+
+pinentrydialog.o: pinentrydialog.cpp.o
 .PHONY : pinentrydialog.o
 
-# target to preprocess a source file
-pinentrydialog.i:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/pinentrydialog.i
+# target to build an object file
+pinentrydialog.cpp.o:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/pinentrydialog.cpp.o
+.PHONY : pinentrydialog.cpp.o
+
+pinentrydialog.i: pinentrydialog.cpp.i
 .PHONY : pinentrydialog.i
 
-# target to generate assembly for a file
-pinentrydialog.s:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/pinentrydialog.s
+# target to preprocess a source file
+pinentrydialog.cpp.i:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/pinentrydialog.cpp.i
+.PHONY : pinentrydialog.cpp.i
+
+pinentrydialog.s: pinentrydialog.cpp.s
 .PHONY : pinentrydialog.s
 
-# target to build an object file
-qrc_pinentry.o:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/qrc_pinentry.o
+# target to generate assembly for a file
+pinentrydialog.cpp.s:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/pinentrydialog.cpp.s
+.PHONY : pinentrydialog.cpp.s
+
+qrc_pinentry.o: qrc_pinentry.cpp.o
 .PHONY : qrc_pinentry.o
 
-# target to preprocess a source file
-qrc_pinentry.i:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/qrc_pinentry.i
+# target to build an object file
+qrc_pinentry.cpp.o:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/qrc_pinentry.cpp.o
+.PHONY : qrc_pinentry.cpp.o
+
+qrc_pinentry.i: qrc_pinentry.cpp.i
 .PHONY : qrc_pinentry.i
 
-# target to generate assembly for a file
-qrc_pinentry.s:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/qrc_pinentry.s
+# target to preprocess a source file
+qrc_pinentry.cpp.i:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/qrc_pinentry.cpp.i
+.PHONY : qrc_pinentry.cpp.i
+
+qrc_pinentry.s: qrc_pinentry.cpp.s
 .PHONY : qrc_pinentry.s
 
-# target to build an object file
-secmem-util.o:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/secmem-util.o
+# target to generate assembly for a file
+qrc_pinentry.cpp.s:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/qrc_pinentry.cpp.s
+.PHONY : qrc_pinentry.cpp.s
+
+secmem-util.o: secmem-util.c.o
 .PHONY : secmem-util.o
 
-# target to preprocess a source file
-secmem-util.i:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/secmem-util.i
+# target to build an object file
+secmem-util.c.o:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/secmem-util.c.o
+.PHONY : secmem-util.c.o
+
+secmem-util.i: secmem-util.c.i
 .PHONY : secmem-util.i
 
-# target to generate assembly for a file
-secmem-util.s:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/secmem-util.s
+# target to preprocess a source file
+secmem-util.c.i:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/secmem-util.c.i
+.PHONY : secmem-util.c.i
+
+secmem-util.s: secmem-util.c.s
 .PHONY : secmem-util.s
 
-# target to build an object file
-secmem.o:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/secmem.o
+# target to generate assembly for a file
+secmem-util.c.s:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/secmem-util.c.s
+.PHONY : secmem-util.c.s
+
+secmem.o: secmem.c.o
 .PHONY : secmem.o
 
-# target to preprocess a source file
-secmem.i:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/secmem.i
+# target to build an object file
+secmem.c.o:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/secmem.c.o
+.PHONY : secmem.c.o
+
+secmem.i: secmem.c.i
 .PHONY : secmem.i
 
-# target to generate assembly for a file
-secmem.s:
-	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/secmem.s
+# target to preprocess a source file
+secmem.c.i:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/secmem.c.i
+.PHONY : secmem.c.i
+
+secmem.s: secmem.c.s
 .PHONY : secmem.s
+
+# target to generate assembly for a file
+secmem.c.s:
+	$(MAKE) -f CMakeFiles/pinentry-qt.dir/build.make CMakeFiles/pinentry-qt.dir/secmem.c.s
+.PHONY : secmem.c.s
 
 # Help Target
 help:
@@ -340,6 +492,8 @@ help:
 	@echo "... install/local"
 	@echo "... install/strip"
 	@echo "... list_install_components"
+	@echo "... package"
+	@echo "... package_source"
 	@echo "... pinentry-qt"
 	@echo "... rebuild_cache"
 	@echo "... assuan-buffer.o"
@@ -360,6 +514,9 @@ help:
 	@echo "... assuan-util.o"
 	@echo "... assuan-util.i"
 	@echo "... assuan-util.s"
+	@echo "... getopt.o"
+	@echo "... getopt.i"
+	@echo "... getopt.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

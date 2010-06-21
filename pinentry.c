@@ -57,6 +57,11 @@
 /* Keep the name of our program here. */
 static char this_pgmname[50]; 
 
+/* The fds for the standard handles.  We use variables so that under
+   W32CE we are able to change them to the rendesvous ids. */
+static int my_stdin_fd = STDIN_FILENO;
+static int my_stdout_fd = STDOUT_FILENO;
+
 
 struct pinentry pinentry =
   {
@@ -1128,5 +1133,16 @@ pinentry_loop2 (int infd, int outfd)
 int
 pinentry_loop (void)
 {
-  return pinentry_loop2 (STDIN_FILENO, STDOUT_FILENO);
+  return pinentry_loop2 (my_stdin_fd, my_stdin_fd);
+}
+
+
+/* Allow changign the standard file handles.  */
+void
+pinentry_set_std_fd (int no, int val)
+{
+  if (no == 0)
+    my_stdin_fd = no;
+  else if (no == 1)
+    my_stdout_fd = no;
 }

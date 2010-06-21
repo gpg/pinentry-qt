@@ -1,7 +1,7 @@
 /*
    main.cpp - A (not yet) secure Qt 4 dialog for PIN entry.
 
-   Copyright (C) 2002, 2008 Klar�lvdalens Datakonsult AB (KDAB)
+   Copyright (C) 2002, 2008 Klarälvdalens Datakonsult AB (KDAB)
    Copyright (C) 2003 g10 Code GmbH
    Copyright 2007 Ingo Klöcker
 
@@ -41,7 +41,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #ifndef HAVE_W32CE_SYSTEM
-#include <errno.h>
+# include <errno.h>
+#endif
+
+#ifdef HAVE_W32CE_SYSTEM
+# include <winioctl.h>
 #endif
 
 #include <memory>
@@ -253,10 +257,120 @@ qt_cmd_handler_ex (pinentry_t pe)
 
 pinentry_cmd_handler_t pinentry_cmd_handler = qt_cmd_handler_ex;
 
+
+#ifdef HAVE_W32CE_SYSTEM
+/* Create a pipe.  WRITE_END shall have the opposite value of the one
+   pssed to _assuan_w32ce_prepare_pipe; see there for more
+   details.  */
+#define GPGCEDEV_IOCTL_MAKE_PIPE                                        \
+  CTL_CODE (FILE_DEVICE_STREAMS, 2049, METHOD_BUFFERED, FILE_ANY_ACCESS)
+static HANDLE
+w32ce_finish_pipe (int rvid, int write_end)
+{
+  HANDLE hd;
+
+  hd = CreateFile (L"GPG1:", write_end? GENERIC_WRITE : GENERIC_READ,
+                   FILE_SHARE_READ | FILE_SHARE_WRITE,
+                   NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL,NULL);
+  if (hd != INVALID_HANDLE_VALUE)
+    {
+      if (!DeviceIoControl (hd, GPGCEDEV_IOCTL_MAKE_PIPE,
+                            &rvid, sizeof rvid, NULL, 0, NULL, NULL))
+        {
+          DWORD lastrc = GetLastError ();
+          CloseHandle (hd);
+          hd = INVALID_HANDLE_VALUE;
+          SetLastError (lastrc);
+        }
+    }
+
+  return hd;
+}
+#endif /*HAVE_W32CE_SYSTEM*/
+
+
+
+/* WindowsCE uses a very strange way of handling the standard streams.
+   There is a function SetStdioPath to associate a standard stream
+   with a file or a device but what we really want is to use pipes as
+   standard streams.  Despite that we implement pipes using a device,
+   we would have some limitations on the number of open pipes due to
+   the 3 character limit of device file name.  Thus we don't take this
+   path.  Another option would be to install a file system driver with
+   support for pipes; this would allow us to get rid of the device
+   name length limitation.  However, with GnuPG we can get away be
+   redefining the standard streams and passing the handles to be used
+   on the command line.  This has also the advantage that it makes
+   creating a process much easier and does not require the
+   SetStdioPath set and restore game.  The caller needs to pass the
+   rendezvous ids using up to three options:
+
+     -&S0=<rvid> -&S1=<rvid> -&S2=<rvid>
+
+   They are all optional but they must be the first arguments on the
+   command line.  Parsing stops as soon as an invalid option is found.
+   These rendezvous ids are then used to finish the pipe creation.*/
+#ifdef HAVE_W32CE_SYSTEM
+static void
+parse_std_file_handles (int *argcp, char ***argvp)
+{
+  int argc = *argcp;
+  char **argv = *argvp;
+  const char *s;
+  int fd;
+  int i;
+  int fixup = 0;
+
+  if (!argc)
+    return;
+
+  for (argc--, argv++; argc; argc--, argv++)
+    {
+      s = *argv;
+      if (*s == '-' && s[1] == '&' && s[2] == 'S'
+          && (s[3] == '0' || s[3] == '1' || s[3] == '2')
+          && s[4] == '=' 
+          && (strchr ("-01234567890", s[5]) || !strcmp (s+5, "null")))
+        {
+          if (s[5] == 'n')
+            fd = (int)(-1);
+          else
+            fd = (int)w32ce_finish_pipe (atoi (s+5), s[3] != '0');
+          if (s[3] == '0' && fd != -1)
+            w32_infd = fd;
+          else if (s[3] == '1' && fd != -1)
+            w32_outfd = fd;
+          fixup++;
+        }
+      else
+        break;
+    }
+
+  if (fixup)
+    {
+      argc = *argcp;
+      argc -= fixup;
+      *argcp = argc;
+
+      argv = *argvp;
+      for (i=1; i < argc; i++)
+        argv[i] = argv[i + fixup];
+      for (; i < argc + fixup; i++)
+        argv[i] = NULL;
+    }
+
+
+}
+#endif /*HAVE_W32CE_SYSTEM*/
+
+
 int
 main (int argc, char *argv[])
 {
-  pinentry_init ("pinentry-qt4");
+#ifdef HAVE_W32CE_SYSTEM
+  parse_std_file_handles (&argc, &argv);
+#endif
+  pinentry_init ("pinentry-qt-qt4");
 
   std::auto_ptr<QApplication> app;
 
@@ -282,12 +396,12 @@ main (int argc, char *argv[])
       if (!new_argv || !*new_argv)
         {
 #ifndef HAVE_W32CE_SYSTEM
-          fprintf (stderr, "pinentry-qt4: can't fixup argument list: %s\n",
+          fprintf (stderr, "pinentry-qt-qt4: can't fixup argument list: %s\n",
                    strerror (errno));
 #else
           /* Since WinCE does not show the stderr output we leave out a 
              GetLastError() message */
-          fprintf (stderr, "pinentry-qt4: can't fixup argument list"); 
+          fprintf (stderr, "pinentry-qt-qt4: can't fixup argument list"); 
 #endif
           exit (EXIT_FAILURE);
 
@@ -317,7 +431,7 @@ main (int argc, char *argv[])
   /* Consumes all arguments.  */
   if (pinentry_parse_opts (argc, argv))
     {
-      printf ("pinentry-qt4 (pinentry) " /* VERSION */ "\n");
+      printf ("pinentry-qt-qt4 (pinentry) " /* VERSION */ "\n");
       return EXIT_SUCCESS;
     }
   else

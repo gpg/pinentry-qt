@@ -1,3 +1,14 @@
+2010-06-21  Werner Koch  <wk@g10code.com>
+
+	* pinentrydialog.cpp: Use #if and not #ifdef along with defined.
+
+	* main.cpp [W32CE]: Include winioctl.h.
+	(w32ce_finish_pipe, parse_std_file_handles) [W32CE]: New.
+	(main) [W32CE]: Call new function.
+	* pinentry.c (my_stdin_fd, my_stdout_fd): New.
+	(pinentry_loop): Use them.
+	(pinentry_set_std_fd): New.
+
 2010-05-21  Marcus Brinkmann  <marcus@g10code.de>
 
 	* Initial release, based on pinentry SVN 2010-05-21.

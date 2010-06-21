@@ -38,7 +38,7 @@
 #include <windows.h>
 #endif
 
-#ifdef defined(Q_WS_WIN) && !defined(HAVE_W32CE_SYSTEM)
+#if defined(Q_WS_WIN) && !defined(HAVE_W32CE_SYSTEM)
 void SetForegroundWindowEx( HWND hWnd )
 {
    //Attach foreground window thread to our thread
