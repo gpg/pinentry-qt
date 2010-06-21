@@ -45,6 +45,7 @@
 #endif
 
 #ifdef HAVE_W32CE_SYSTEM
+# include <winbase.h>
 # include <winioctl.h>
 #endif
 
