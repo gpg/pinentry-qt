@@ -337,9 +337,9 @@ parse_std_file_handles (int *argcp, char ***argvp)
           else
             fd = (int)w32ce_finish_pipe (atoi (s+5), s[3] != '0');
           if (s[3] == '0' && fd != -1)
-            w32_infd = fd;
+            pinentry_set_std_fd (0, fd);
           else if (s[3] == '1' && fd != -1)
-            w32_outfd = fd;
+            pinentry_set_std_fd (1, fd);
           fixup++;
         }
       else
