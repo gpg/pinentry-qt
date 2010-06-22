@@ -1,3 +1,7 @@
+2010-06-22  Werner Koch  <wk@g10code.com>
+
+	* pinentry.c (pinentry_loop): Pass the correct fd.
+
 2010-06-21  Werner Koch  <wk@g10code.com>
 
 	* pinentrydialog.cpp: Use #if and not #ifdef along with defined.

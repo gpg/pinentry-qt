@@ -1133,7 +1133,7 @@ pinentry_loop2 (int infd, int outfd)
 int
 pinentry_loop (void)
 {
-  return pinentry_loop2 (my_stdin_fd, my_stdin_fd);
+  return pinentry_loop2 (my_stdin_fd, my_stdout_fd);
 }
 
 
