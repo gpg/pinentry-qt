@@ -2,6 +2,10 @@
 
 	* pinentry.c (pinentry_loop): Pass the correct fd.
 
+2010-06-21  Andre Heinecke <aheinecke@intevation.de>
+
+	* main.cpp [W32CE]: Include winbase.h
+
 2010-06-21  Werner Koch  <wk@g10code.com>
 
 	* pinentrydialog.cpp: Use #if and not #ifdef along with defined.
