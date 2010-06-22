@@ -184,7 +184,8 @@ lock_pool( void *p, size_t n )
 	    log_error("can't lock memory: %s\n", strerror(err));
 	show_warning = 1;
     }
-
+#elif HAVE_W32CE_SYSTEM
+    /* No secure memory - and it does not make sense anyway.  */
 #else
     log_info("Please note that you don't have secure memory on this system\n");
 #endif

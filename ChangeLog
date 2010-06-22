@@ -1,5 +1,7 @@
 2010-06-22  Werner Koch  <wk@g10code.com>
 
+	* secmem.c (lock_pool) [W32CE]: Do not print the no secmem warning.
+
 	* pinentry.c (pinentry_loop): Pass the correct fd.
 
 2010-06-21  Andre Heinecke <aheinecke@intevation.de>

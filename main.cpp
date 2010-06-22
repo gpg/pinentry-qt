@@ -279,11 +279,16 @@ w32ce_finish_pipe (int rvid, int write_end)
                             &rvid, sizeof rvid, NULL, 0, NULL, NULL))
         {
           DWORD lastrc = GetLastError ();
+          fprintf (stderr, "rvid %d, DeviceIoControl() failed: rc=%d\n",
+                   rvid, (int)GetLastError ());
           CloseHandle (hd);
           hd = INVALID_HANDLE_VALUE;
           SetLastError (lastrc);
         }
     }
+  else
+    fprintf (stderr, "rvid %d, CreateFile(GPG1) failed: rc=%d\n",
+             rvid, (int)GetLastError ());
 
   return hd;
 }
