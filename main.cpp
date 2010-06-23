@@ -285,6 +285,8 @@ w32ce_finish_pipe (int rvid, int write_end)
           hd = INVALID_HANDLE_VALUE;
           SetLastError (lastrc);
         }
+      else
+        fprintf (stderr, "rvid %d, mapped to %p\n", rvid, hd);
     }
   else
     fprintf (stderr, "rvid %d, CreateFile(GPG1) failed: rc=%d\n",
@@ -333,6 +335,7 @@ parse_std_file_handles (int *argcp, char ***argvp)
   for (argc--, argv++; argc; argc--, argv++)
     {
       s = *argv;
+      fprintf (stderr, "parse_std_file_handles '%s'\n", s);
       if (*s == '-' && s[1] == '&' && s[2] == 'S'
           && (s[3] == '0' || s[3] == '1' || s[3] == '2')
           && s[4] == '=' 
