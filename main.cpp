@@ -374,6 +374,8 @@ int
 main (int argc, char *argv[])
 {
 #ifdef HAVE_W32CE_SYSTEM
+  pinentry_set_std_fd (0, fileno (stdin));
+  pinentry_set_std_fd (1, fileno (stdout));
   parse_std_file_handles (&argc, &argv);
 #endif
   pinentry_init ("pinentry-qt-qt4");
