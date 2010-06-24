@@ -1142,9 +1142,9 @@ void
 pinentry_set_std_fd (int no, int val)
 {
   if (no == 0)
-    my_stdin_fd = no;
+    my_stdin_fd = val;
   else if (no == 1)
-    my_stdout_fd = no;
+    my_stdout_fd = val;
 
   fprintf (stderr, "%s: now: my_stdin_fd=%d my_stdout_fd=%d\n", 
            __func__, my_stdin_fd, my_stdout_fd);

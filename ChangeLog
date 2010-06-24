@@ -1,3 +1,7 @@
+2010-06-24  Werner Koch  <wk@g10code.com>
+
+	* pinentry.c (pinentry_set_std_fd): Assign VAL and not NO.
+
 2010-06-23  Werner Koch  <wk@g10code.com>
 
 	* main.cpp (main): Setup default file handles via fileno.
