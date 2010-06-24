@@ -1145,4 +1145,7 @@ pinentry_set_std_fd (int no, int val)
     my_stdin_fd = no;
   else if (no == 1)
     my_stdout_fd = no;
+
+  fprintf (stderr, "%s: now: my_stdin_fd=%d my_stdout_fd=%d\n", 
+           __func__, my_stdin_fd, my_stdout_fd);
 }
