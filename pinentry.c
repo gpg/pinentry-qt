@@ -1147,5 +1147,5 @@ pinentry_set_std_fd (int no, int val)
     my_stdout_fd = val;
 
   fprintf (stderr, "%s: now: my_stdin_fd=%d my_stdout_fd=%d\n", 
-           __func__, my_stdin_fd, my_stdout_fd);
+           __FUNCTION__, my_stdin_fd, my_stdout_fd);
 }

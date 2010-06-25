@@ -98,7 +98,7 @@ assuan_init_pipe_server (ASSUAN_CONTEXT *r_ctx, int filedes[2])
       ctx->pipe_mode = 1;
 
       fprintf (stderr, "%s: ctx=%p inbound=0x%d outbound=0x%d\n", 
-               __func__, ctx, ctx->inbound.fd, ctx->outbound.fd);
+               __FUNCTION__, ctx, ctx->inbound.fd, ctx->outbound.fd);
     }
   return rc;
 }
