@@ -66,8 +66,6 @@ my_log_prefix (void)
 static int
 writen ( int fd, const char *buffer, size_t length )
 {
-  fprintf (stderr, "writen called on %d for ->%.*s<-\n", 
-           fd, (int)length, buffer? buffer:"[null]");
   while (length)
     {
       int nwritten;
@@ -85,15 +83,6 @@ writen ( int fd, const char *buffer, size_t length )
 #endif
       if (nwritten < 0)
         {
-          fprintf (stderr, "error writing %d bytes: rc=%d\n",
-                   (int)length,
-#ifdef HAVE_W32CE_SYSTEM
-                   (int)GetLastError ()
-#else
-                   4242
-#endif
-);
-
 #ifndef HAVE_W32CE_SYSTEM
           if (errno == EINTR)
             continue;
