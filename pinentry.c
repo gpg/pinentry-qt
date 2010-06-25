@@ -413,6 +413,7 @@ usage (void)
 {
   fprintf (stdout, "Usage: %s [OPTION]...\n"
 "Ask securely for a secret and print it to stdout.\n"
+"Note that this is a fork of the standard pinentry.\n"
 "\n"
 "      --display DISPLAY Set the X display\n"
 "      --ttyname PATH    Set the tty terminal node name\n"

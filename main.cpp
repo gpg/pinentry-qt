@@ -2,7 +2,7 @@
    main.cpp - A (not yet) secure Qt 4 dialog for PIN entry.
 
    Copyright (C) 2002, 2008 Klarälvdalens Datakonsult AB (KDAB)
-   Copyright (C) 2003 g10 Code GmbH
+   Copyright (C) 2003, 2010 g10 Code GmbH
    Copyright 2007 Ingo Klöcker
 
    Written by Steffen Hansen <steffen@klaralvdalens-datakonsult.se>.
@@ -378,7 +378,28 @@ main (int argc, char *argv[])
   pinentry_set_std_fd (1, (int)fileno (stdout));
   parse_std_file_handles (&argc, &argv);
 #endif
-  pinentry_init ("pinentry-qt-qt4");
+  /* Print the version as early as possible.  This avoids error
+     messages printed due to pinentry_init etc.  */ 
+  for (int i=1; i < argc; i++) 
+    {
+      if (!strcmp (argv[i], "--"))
+        break;
+      else if (!strcmp (argv[i], "--version"))
+        {
+          fputs ("pinentry-qt " VERSION "\n"
+                 "Copyright (C) 2010 g10 Code GmbH\n"
+                 "License GPLv2+: GNU GPL version 2 or later <http://gnu.org/licenses/gpl.html>\n"
+                 "This is free software: you are free to change and redistribute it.\n"
+                 "There is NO WARRANTY, to the extent permitted by law.\n"
+                 "\n"
+                 "Note: This is a fork of the standard pinentry software\n"
+                 , stdout);
+          break;
+        }
+      
+    }
+  
+  pinentry_init ("pinentry-qt");
 
   std::auto_ptr<QApplication> app;
 
@@ -404,12 +425,12 @@ main (int argc, char *argv[])
       if (!new_argv || !*new_argv)
         {
 #ifndef HAVE_W32CE_SYSTEM
-          fprintf (stderr, "pinentry-qt-qt4: can't fixup argument list: %s\n",
+          fprintf (stderr, "pinentry-qt: can't fixup argument list: %s\n",
                    strerror (errno));
 #else
           /* Since WinCE does not show the stderr output we leave out a 
              GetLastError() message */
-          fprintf (stderr, "pinentry-qt-qt4: can't fixup argument list"); 
+          fprintf (stderr, "pinentry-qt: can't fixup argument list"); 
 #endif
           exit (EXIT_FAILURE);
 
@@ -439,8 +460,8 @@ main (int argc, char *argv[])
   /* Consumes all arguments.  */
   if (pinentry_parse_opts (argc, argv))
     {
-      printf ("pinentry-qt-qt4 (pinentry) " /* VERSION */ "\n");
-      return EXIT_SUCCESS;
+      /* We already printed the version.  */
+      exit (EXIT_SUCCESS);
     }
   else
     {

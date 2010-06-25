@@ -1,0 +1,7 @@
+Noteworthy changes in version 0.5.0 (2010-06-25)
+------------------------------------------------
+
+ * Initial release.  Note that Pinentry-qt is based on an SVN snapshot
+   from 2010-05-21 of the standard pinentry.  It has a lower version
+   number because it is a different software and should easily be
+   distinguishable from the standard pinentry.

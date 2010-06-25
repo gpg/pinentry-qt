@@ -1,3 +1,9 @@
+2010-06-25  Werner Koch  <wk@g10code.com>
+
+	Initial release 0.5.0.
+
+	* CMakeLists.txt: Set version to 0.5.0.
+
 2010-06-25  Andre Heinecke  <aheinecke@intevation.de>
 
 	* main.cpp (parse_std_file_handles): Add a cast to integer for the fds.
