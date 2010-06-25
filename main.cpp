@@ -346,9 +346,9 @@ parse_std_file_handles (int *argcp, char ***argvp)
           else
             fd = (int)w32ce_finish_pipe (atoi (s+5), s[3] != '0');
           if (s[3] == '0' && fd != -1)
-            pinentry_set_std_fd (0, fd);
+            pinentry_set_std_fd (0, (int)fd);
           else if (s[3] == '1' && fd != -1)
-            pinentry_set_std_fd (1, fd);
+            pinentry_set_std_fd (1, (int)fd);
           fixup++;
         }
       else
@@ -377,8 +377,8 @@ int
 main (int argc, char *argv[])
 {
 #ifdef HAVE_W32CE_SYSTEM
-  pinentry_set_std_fd (0, fileno (stdin));
-  pinentry_set_std_fd (1, fileno (stdout));
+  pinentry_set_std_fd (0, (int)fileno (stdin));
+  pinentry_set_std_fd (1, (int)fileno (stdout));
   parse_std_file_handles (&argc, &argv);
 #endif
   pinentry_init ("pinentry-qt-qt4");
