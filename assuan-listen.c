@@ -77,19 +77,11 @@ assuan_accept (ASSUAN_CONTEXT ctx)
 
   if (ctx->pipe_mode > 1)
     return -1; /* second invocation for pipemode -> terminate */
-      fprintf (stderr, "%s: ctx=%p inbound=0x%d outbound=0x%d\n", 
-               __FUNCTION__, ctx, ctx->inbound.fd, ctx->outbound.fd);
   ctx->finish_handler (ctx);
-      fprintf (stderr, "%s: ctx=%p inbound=0x%d outbound=0x%d\n", 
-               __FUNCTION__, ctx, ctx->inbound.fd, ctx->outbound.fd);
-      
 
   rc = ctx->accept_handler (ctx);
   if (rc)
     return rc;
-
-      fprintf (stderr, "%s: ctx=%p inbound=0x%d outbound=0x%d\n", 
-               __FUNCTION__, ctx, ctx->inbound.fd, ctx->outbound.fd);
 
   /* send the hello */
   rc = assuan_write_line (ctx, ctx->hello_line? ctx->hello_line
@@ -97,10 +89,6 @@ assuan_accept (ASSUAN_CONTEXT ctx)
   if (rc)
     return rc;
   
-
-      fprintf (stderr, "%s: ctx=%p inbound=0x%d outbound=0x%d\n", 
-               __FUNCTION__, ctx, ctx->inbound.fd, ctx->outbound.fd);
-
   if (ctx->pipe_mode)
     ctx->pipe_mode = 2;
   

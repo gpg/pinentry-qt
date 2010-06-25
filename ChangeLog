@@ -1,11 +1,7 @@
 2010-06-25  Andre Heinecke  <aheinecke@intevation.de>
 
-	* main.cpp (parse_std_file_handles): Added a cast to integer for the fds.
-	* main.cpp (main): Added a cast to integer to the fileno call.
-	* assuan-pipe-server.c (assuan_init_pipe_server): 
-	Use of __FUNCTION__ instead of __func__
-	* assuan-listen.c (assuan_accept): Use of __FUNCTION__ instead of __func__
-	* pinentry.c (pinentry_set_std_fd): Use of __FUNCTION__ instead of __func__
+	* main.cpp (parse_std_file_handles): Add a cast to integer for the fds.
+	(main): Add a cast to integer to the fileno call.
 
 2010-06-24  Werner Koch  <wk@g10code.com>
 
