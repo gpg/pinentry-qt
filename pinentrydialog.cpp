@@ -110,6 +110,7 @@ PinEntryDialog::PinEntryDialog( QWidget* parent, const char* name, bool modal,
 
   _edit = new QSecureLineEdit( this );
   _edit->setMaxLength( 256 );
+  _edit->setEchoMode( QLineEdit::PasswordEchoOnEdit );
 
   _prompt->setBuddy( _edit );
 
@@ -140,7 +141,7 @@ PinEntryDialog::PinEntryDialog( QWidget* parent, const char* name, bool modal,
   connect( buttons, SIGNAL(accepted()), this, SLOT(accept()) );
   connect( buttons, SIGNAL(rejected()), this, SLOT(reject()) );
   connect( _edit, SIGNAL( textChanged(secqstring) ),
-	   this, SLOT( updateQuality(secqstring) ) );
+           this, SLOT( updateQuality(secqstring) ) );
 
   _edit->setFocus();
 

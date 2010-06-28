@@ -1,3 +1,7 @@
+2010-06-28  Werner Koch  <wk@g10code.com>
+
+	* pinentrydialog.cpp (PinEntryDialog): Disable echo.
+
 2010-06-25  Werner Koch  <wk@g10code.com>
 
 	Initial release 0.5.0.
