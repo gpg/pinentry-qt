@@ -56,8 +56,7 @@ set(pinentry_qt_SRCS
 qt4_automoc(${qtproject_SRCS})
 
 add_executable(pinentry-qt ${pinentry_qt_SRCS})
-target_link_libraries(pinentry-qt ${QT_LIBRARIES})
-
+target_link_libraries(pinentry-qt ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY})
 install(TARGETS pinentry-qt DESTINATION bin)
 
 
