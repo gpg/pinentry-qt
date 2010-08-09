@@ -2,6 +2,10 @@
 
 	* CMakelists.txt: Disable some Microsoft-CRT deprecation warnings
 	* CMakelists.txt: Only link with Qt-GUI and Qt-Core
+	* assuan-buffer.c, assuan-listen.c, assuan.h, pinentry.c, pinentry.h,
+	  pinentrydialog.cpp, secmem-util.c, secmem-util.h, secmem.c: Change
+	  includes and definitions to enable building for Windows NT with MSVC
+
 
 2010-06-28  Werner Koch  <wk@g10code.com>
 

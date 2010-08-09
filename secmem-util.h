@@ -20,10 +20,10 @@
 #ifndef _UTIL_H
 #define _UTIL_H
 
-#ifndef HAVE_W32CE_SYSTEM
-# include <sys/types.h>
+#ifdef HAVE_W32_SYSTEM
+ typedef long ssize_t;
 #else
-typedef long ssize_t;
+# include <sys/types.h>
 #endif
 
 #ifndef HAVE_BYTE_TYPEDEF

@@ -59,7 +59,7 @@ void raiseWindow( QWidget* w )
 {
 #ifdef HAVE_W32CE_SYSTEM
     SetForegroundWindow( w->winId() );
-#elif Q_WS_WIN
+#elif defined(Q_WS_WIN)
     SetForegroundWindowEx( w->winId() );
 #endif
     w->raise(); 

@@ -24,10 +24,9 @@
 #ifndef HAVE_W32CE_SYSTEM
 # include <errno.h>
 # include <locale.h>
-# include <unistd.h>
-#else
-# define STDIN_FILENO 0
-# define STDOUT_FILENO 1
+# ifndef HAVE_W32_SYSTEM
+#  include <unistd.h>
+# endif
 #endif
 
 #include <stdlib.h>
@@ -37,8 +36,11 @@
 #include <langinfo.h>
 #endif
 #include <limits.h>
-#ifdef HAVE_W32CE_SYSTEM
+
+#ifdef HAVE_W32_SYSTEM
 # include <windows.h>
+# define STDIN_FILENO 0
+# define STDOUT_FILENO 1
 #endif
 
 #if defined FALLBACK_CURSES || defined PINENTRY_CURSES || defined PINENTRY_GTK
@@ -49,10 +51,6 @@
 #include "memory.h"
 #include "secmem-util.h"
 #include "pinentry.h"
-
-#ifdef HAVE_W32CE_SYSTEM
-#define getpid() GetCurrentProcessId ()
-#endif
 
 /* Keep the name of our program here. */
 static char this_pgmname[50]; 

@@ -22,10 +22,10 @@
 #define ASSUAN_H
 
 #include <stdio.h>
-#ifndef HAVE_W32CE_SYSTEM
-# include <sys/types.h>
-#else
+#ifdef HAVE_W32_SYSTEM
 typedef int pid_t;
+#else
+# include <sys/types.h>
 #endif
 
 #ifdef __cplusplus

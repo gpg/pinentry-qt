@@ -26,7 +26,9 @@
 #include <stdio.h>
 #ifndef HAVE_W32CE_SYSTEM
 # include <errno.h>
-# include <unistd.h>
+# ifndef HAVE_W32_SYSTEM
+#  include <unistd.h>
+# endif
 #endif
 #include <assert.h>
 #ifdef USE_GNU_PTH

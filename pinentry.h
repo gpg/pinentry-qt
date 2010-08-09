@@ -197,19 +197,19 @@ extern pinentry_cmd_handler_t pinentry_cmd_handler;
 /* Windows declares sleep as obsolete, but provides a definition for
    _sleep but non for the still existing sleep.  */
 #define sleep(a) _sleep ((a))
-
-#ifdef HAVE_W32CE_SYSTEM
-
-/* strdup also got a prefix */
-#define strdup _strdup
-/* without signals we need not abort */
-#define abort(a) exit(1)
-/* case insensitive comparisons are both */
-#define strncasecmp _strnicmp
 /* On MSVC snprintf is not defined but _snprintf is */
 #define snprintf _snprintf
-#endif /*HAVE_WIN32CE_SYSTEM*/
+/* case insensitive comparisons are both */
+#define strncasecmp _strnicmp
+/* strdup also got a prefix */
+#define strdup _strdup
 #endif /*HAVE_W32_SYSTEM*/
+
+#ifdef HAVE_W32CE_SYSTEM
+#define getpid() GetCurrentProcessId ()
+/* without signals we need not abort */
+#define abort(a) exit(1)
+#endif /*HAVE_WIN32CE_SYSTEM*/
 
 #if 0 
 {

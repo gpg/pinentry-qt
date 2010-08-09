@@ -23,8 +23,11 @@
 #define _GNU_SOURCE 1
 
 #ifndef HAVE_W32CE_SYSTEM
-# include <unistd.h>
 # include <errno.h>
+# include <sys/types.h>
+# ifndef HAVE_W32_SYSTEM
+#  include <unistd.h>
+# endif
 #endif
 #include <stdarg.h>
 #include <stdio.h>

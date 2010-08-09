@@ -24,8 +24,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #ifndef HAVE_W32CE_SYSTEM
-#include <unistd.h>
-#include <errno.h>
+# include <errno.h>
+# ifndef HAVE_W32_SYSTEM
+#  include <unistd.h>
+# endif
 #endif
 #include <stdarg.h>
 #if defined(HAVE_MLOCK) || defined(HAVE_MMAP)

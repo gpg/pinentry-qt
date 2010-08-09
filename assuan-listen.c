@@ -24,10 +24,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#ifndef HAVE_W32CE_SYSTEM
+#ifndef HAVE_W32_SYSTEM
 # include <unistd.h>
-#else
-# define close CloseHandle
+#endif
+#ifdef HAVE_W32CE_SYSTEM
+#  define close CloseHandle
 #endif
 
 #include "assuan-defs.h"
