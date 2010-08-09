@@ -1,3 +1,7 @@
+2010-08-09  Andre Heinecke <aheinecke@intevation.de>
+
+	* CMakelists.txt: Disable some Microsoft-CRT deprecation warnings
+
 2010-06-28  Werner Koch  <wk@g10code.com>
 
 	* pinentrydialog.cpp (PinEntryDialog): Disable echo.

@@ -17,6 +17,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in ${CMAKE_CURRENT_BINARY_DI
 add_definitions(-DHAVE_CONFIG_H=1)
 
 if(WIN32)
+add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 add_definitions(-DHAVE_W32_SYSTEM=1)
 add_definitions(-DHAVE_DOSISH_SYSTEM=1)
 endif(WIN32)
