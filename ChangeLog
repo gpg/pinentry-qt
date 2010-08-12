@@ -1,3 +1,7 @@
+2010-08-12  Werner Koch  <wk@g10code.com>
+
+	* pinentrydialog.cpp (PinEntryDialog): s/PasswordEchoOnEdit/Password/.
+
 2010-08-12  Andre Heinecke  <aheinecke@intevation.de>
 
 	* pinentrydialog.cpp (PinEntryDialog): Connect signal with standard type

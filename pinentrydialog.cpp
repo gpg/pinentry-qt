@@ -110,7 +110,10 @@ PinEntryDialog::PinEntryDialog( QWidget* parent, const char* name, bool modal,
 
   _edit = new QSecureLineEdit( this );
   _edit->setMaxLength( 256 );
-  _edit->setEchoMode( QLineEdit::PasswordEchoOnEdit );
+  /* FIXME: For unknown reasons PasswordEchoOnEdit does not work.  The
+     asterisk are only displayed after changing the focus.  Tested
+     with Qt 4.6.3.  */
+  _edit->setEchoMode( QLineEdit::Password );
 
   _prompt->setBuddy( _edit );
 
