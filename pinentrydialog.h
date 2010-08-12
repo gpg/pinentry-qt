@@ -79,7 +79,7 @@ public:
   void setPinentryInfo (pinentry_t);
 
 public slots:
-  void updateQuality(const secqstring&);
+  void updateQuality(const QString&);
 
 protected:
   /* reimp */ void showEvent( QShowEvent* event );
