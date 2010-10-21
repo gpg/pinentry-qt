@@ -20,9 +20,8 @@
    General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-*/
+   along with this program; if not, see <http://www.gnu.org/licenses/>. 
+ */
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"
@@ -370,6 +369,15 @@ parse_std_file_handles (int *argcp, char ***argvp)
 #endif /*HAVE_W32CE_SYSTEM*/
 
 
+#ifdef Q_WS_X11
+static void
+pinentry_set_display_env (const char *display)
+{
+  setenv ("DISPLAY", display, true);
+}
+#endif
+
+
 int
 main (int argc, char *argv[])
 {
@@ -388,8 +396,10 @@ main (int argc, char *argv[])
         {
           fputs ("pinentry-qt " VERSION "\n"
                  "Copyright (C) 2010 g10 Code GmbH\n"
-                 "License GPLv2+: GNU GPL version 2 or later <http://gnu.org/licenses/gpl.html>\n"
-                 "This is free software: you are free to change and redistribute it.\n"
+                 "License GPLv2+: GNU GPL version 2 or later "
+                 "<http://gnu.org/licenses/gpl.html>\n"
+                 "This is free software: you are free to change and "
+                 "redistribute it.\n"
                  "There is NO WARRANTY, to the extent permitted by law.\n"
                  "\n"
                  "Note: This is a fork of the standard pinentry software\n"
@@ -441,6 +451,23 @@ main (int argc, char *argv[])
             new_argv[i] = strcpy (p, argv[i]+1);
             p += strlen (argv[i]+1) + 1;
             done = 1;
+#ifdef Q_WS_X11
+            /* Set DISPLAY environment variable if --display option is
+               passed to pinentry-qt. This solves the misbehavior of
+               the X11 server on Maemo5 if DISPLAY is reset e.g.  with
+               DISPLAY="" pinentry-qt --display :0.0  */
+            if (i+1 < argc)
+              {
+                pinentry_set_display_env (argv[i+1]);
+              }
+            else
+              {
+                fprintf (stderr,
+                         "pinentry-qt: --display switch set without a "
+                         "parameter\n");
+                exit (EXIT_FAILURE);
+              }
+#endif
           }
         else
           {
