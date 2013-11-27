@@ -1,3 +1,10 @@
+NOTE: This is not anymore maintained.  It was used some years ago for
+a special purpose (building Pinentry with cmake for WindowsCE) and has
+never seen any maintenance or real releases.  Please use the reguular
+pinentry repository which includes QT version and is maintained.
+
+
+========  old stuff =====
 PIN Entry for QT
 ----------------
 
@@ -11,4 +18,3 @@ Some of the code is taken from Robert Bihlmeyer's Quintuple-Agent.
 For security reasons, all internationalization has been removed.  The
 client is expected to tell the PIN entry the text strings to be
 displayed.
-
